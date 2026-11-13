@@ -2,6 +2,7 @@ package com.geosnap.geosnapbackend.controller;
 
 import com.geosnap.geosnapbackend.dto.AttendanceRequest;
 import com.geosnap.geosnapbackend.service.GeofencingService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,8 +23,10 @@ public class AttendanceController {
         this.geofencingService = geofencingService;
     }
 
+
+
     @PostMapping("/validate")
-    public ResponseEntity<?> validateAttendance(@RequestBody AttendanceRequest request) {
+    public ResponseEntity<?> validateAttendance(@Valid @RequestBody AttendanceRequest request) {
 
         double distance = geofencingService.calculateDistanceInMeters(
                 request.getLatitude(),
